@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  ncat1:
+    image: ncat:latest
+    networks:
+      - code-network
+  ncat2:
+    image: ncat:latest
+    networks:
+      - code-network
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - ncat1
+      - ncat2
+    networks:
+      - code-network
+    ports:
+      - "12345:12345"
+    volumes:
+      # - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf:rw
+
+networks:
+    code-network:
+      driver: bridge
