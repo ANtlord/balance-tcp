@@ -1,13 +1,17 @@
 version: '3.5'
 services:
   ncat1:
+    tty: true
     image: ncat:latest
     networks:
       - code-network
+
   ncat2:
+    tty: true
     image: ncat:latest
     networks:
       - code-network
+
   nginx:
     image: nginx:latest
     depends_on:
